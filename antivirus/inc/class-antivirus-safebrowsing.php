@@ -20,7 +20,7 @@ class AntiVirus_SafeBrowsing extends AntiVirus {
 	/**
 	 * Pings the Safe Browsing API to see if the website is infected.
 	 */
-	public static function check_safe_browsing() {
+	public static function check_safe_browsing(): void {
 		// Check if API key is provided in config.
 		$key = parent::_get_option( 'safe_browsing_key' );
 		// Opt-out, if no API key was specified.
@@ -42,7 +42,7 @@ class AntiVirus_SafeBrowsing extends AntiVirus {
 					array(
 						'client'     => array(
 							'clientId'      => 'wpantivirus',
-							'clientVersion' => '1.5.0',
+							'clientVersion' => '1.6.0',
 						),
 						'threatInfo' => array(
 							'threatTypes'      => array(
@@ -55,7 +55,7 @@ class AntiVirus_SafeBrowsing extends AntiVirus {
 							'platformTypes'    => array( 'ANY_PLATFORM' ),
 							'threatEntryTypes' => array( 'URL' ),
 							'threatEntries'    => array(
-								array( 'url' => urlencode( get_bloginfo( 'url' ) ) ),
+								array( 'url' => get_bloginfo( 'url' ) ),
 							),
 						),
 					)
@@ -81,7 +81,7 @@ class AntiVirus_SafeBrowsing extends AntiVirus {
 					sprintf(
 						"%s\r\nhttps://transparencyreport.google.com/safe-browsing/search?url=%s&hl=%s",
 						esc_html__( 'Google has found a problem on your page and probably listed it on a blacklist. It is likely that your website or your hosting account has been hacked and malware or phishing code was installed. We recommend to check your site. For more details please check the Google Safe Browsing diagnostic page:', 'antivirus' ),
-						urlencode( get_bloginfo( 'url' ) ),
+						rawurlencode( get_bloginfo( 'url' ) ),
 						substr( get_locale(), 0, 2 )
 					)
 				);

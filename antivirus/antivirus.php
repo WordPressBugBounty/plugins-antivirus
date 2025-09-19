@@ -1,21 +1,23 @@
 <?php
 /**
- * Plugin Name: AntiVirus
- * Description: Security plugin to protect your blog or website against exploits and spam injections.
- * Author:      pluginkollektiv
- * Author URI:  https://pluginkollektiv.org
- * Plugin URI:  https://antivirus.pluginkollektiv.org
- * Text Domain: antivirus
- * License:     GPLv2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
- * Version:     1.5.2
+ * Plugin Name:       AntiVirus
+ * Plugin URI:        https://antivirus.pluginkollektiv.org
+ * Description:       Security plugin to protect your blog or website against exploits and spam injections.
+ * Author:            pluginkollektiv
+ * Author URI:        https://pluginkollektiv.org
+ * Version:           1.6.0
+ * Requires at least: 5.0
+ * Requires PHP:      7.4
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       antivirus
  *
  * @package AntiVirus
  */
 
 /*
 Copyright (C)  2009-2015 Sergej Müller
-Copyright (C)  2016-2023 pluginkollektiv
+Copyright (C)  2016-2025 pluginkollektiv
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -44,11 +46,11 @@ define( 'ANTIVIRUS_FILE', __FILE__ );
  *
  * @param string $class_name The classname.
  */
-function antivirus_autoload( $class_name ) {
+function antivirus_autoload( string $class_name ): void {
 	if ( in_array( $class_name, array( 'AntiVirus', 'AntiVirus_CheckInternals', 'AntiVirus_SafeBrowsing', 'AntiVirus_ChecksumVerifier' ), true ) ) {
 		require_once sprintf(
 			'%s%s%s%sclass-%s.php',
-			dirname( __FILE__ ),
+			__DIR__,
 			DIRECTORY_SEPARATOR,
 			'inc',
 			DIRECTORY_SEPARATOR,
